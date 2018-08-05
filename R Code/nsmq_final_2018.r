@@ -9,7 +9,7 @@ library(ggrepel)
 
 ### Import NSMQ 2018 Final Data into R
 
-nsmq_data <- read_csv("C:\\Users\\DAVID\\Documents\\nsmq\\nsmq_final_2018.csv")
+nsmq_data <- read_csv("C:\\Users\\DAVID\\Documents\\nsmq\\nsmq_final_2018\\nsmq_final_2018.csv")
 
 nsmq_data$n <- 1:nrow(nsmq_data)
 
@@ -135,6 +135,7 @@ for(i in 1:(nrow(nsmq_data)/3)){
   
 }
 
+
 data.frame(gap = c(gap, 6), stage = c(stage, "Finals"), year = c(year, 2018), school = c(school, "West Africa SHS vs Adisadel College vs St. Peters SHS")) %>% 
   arrange(-desc(gap)) %>% 
   slice(1:20) %>% 
@@ -151,20 +152,3 @@ data.frame(gap = c(gap, 6), stage = c(stage, "Finals"), year = c(year, 2018), sc
   scale_fill_manual(values = c("TRUE" = "forestgreen", "FALSE" = "gray")) + 
   theme(legend.position = "None")
   
-
-data.frame(gap = gap, stage = stage, year = year) %>% ggplot(aes(x = gap)) + geom_histogram()+facet_wrap(stage~year)
-
-data.frame(gap = gap, stage = stage, year = year) %>% group_by(year) %>% summarise(mean(gap))
-
-data.frame(gap = gap, stage = stage) %>% ggplot(aes(x = gap)) + geom_histogram()+facet_wrap(~stage)
-
-data.frame(gap = gap, stage = stage) %>%group_by(stage) %>% summarise(mean(gap))
-
-nsmq_data$gap <- gap
-
-nsmq_data %>% ggplot(aes(x = gap)) + geom_histogram()+facet_wrap(~year)
-
-nsmq_data %>% ggplot(aes(x = gap)) + geom_histogram()+facet_wrap(~stage)
-
-nsmq_data %>% group_by(stage) %>% summarise(mean(gap))
-
